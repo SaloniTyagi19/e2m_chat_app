@@ -1,0 +1,101 @@
+body {
+    font-family:  Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+.container{
+    max-width: 40%;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+h2{
+    margin-bottom: 20px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+#loginForm, #signupForm{
+    display: flex;
+    flex-direction: column;
+}
+input, textarea, button {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #b9b9b1;
+}
+textarea {
+    resize: none;
+}
+button{
+    background-color: #8bb6e4;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+button:hover{
+    background-color: #35608d;
+}
+.chat-container{
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px 5px;
+}
+.chat-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+}
+.chat-box{
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #e8ebec;
+}
+.chat-box div{
+    margin-bottom: 10px;
+    display: flex;
+    gap: 28px;
+    text-align: start;
+}
+.user-list{
+    margin: 15px 0;
+    max-height: 20%;
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #d8d3d3;
+}
+.user-list label{
+    display: block;
+    margin-bottom: 10px;
+}
+#showSignupButton, #showLoginButton{
+    background: #fff;
+    color: rgb(85,26,139)
+}
+.chat-list{
+    max-height: 400px;
+    overflow-y: scroll;
+}
+.chat-item {
+    padding: 8px;
+    margin: 8px;
+    border: 1px solid #8bb6e4;
+    border-radius: 8px;
+}

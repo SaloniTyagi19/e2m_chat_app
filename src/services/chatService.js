@@ -4,6 +4,7 @@ import message from '../utils/messages.js';
 import appError from '../utils/appError.js';
 import httpStatus from 'http-status';
 import getQueryOptions from '../utils/queryParams.js';
+import messageModel from '../models/messageModel.js';
 
 const checkExisting = async (name) => {
     const checkChat = await chatModel.findOne({ name: { $regex: new RegExp(`^${name}$`, 'i') } });
@@ -16,7 +17,10 @@ export const chatCreate = async (body) => {
         if (alreadyChat) {
             throw new appError(httpStatus.BAD_REQUEST, message.SIGNUP_ERROR.replace('#', 'chat'));
         } else {
-            const chat = await chatModel.create({ name, members })
+            const users = await userModel.find({ userName: { $in: members } })
+            const userIds = users.map((user) => user._id);
+            const membersList = [...new Set([...userIds])];
+            const chat = await chatModel.create({ name, members: membersList })
             return {
                 chatId: chat._id,
                 name,
@@ -56,6 +60,26 @@ export const getChatList = async (query, userId) => {
     const chat = await chatModel.find({members: userId}).select('name members').sort(sort)
         .skip(skip).limit(limit).exec()
     const totalPages = Math.ceil(chat.length / limit)
-    return { chat, total: users.length, totalPages };
+    return { chat, total: chat.length, totalPages };
+        
+}
+
+export const getMessageList = async (query) => {
+    const { chatId } = query;
+    if (!chatId) {
+        throw new appError(httpStatus.BAD_REQUEST, message.VALID_INPUT.replace('#', 'Chat id'));
+    }
+    const chat = await chatModel.findById(chatId);
+    if (!chat) {
+        throw new appError(httpStatus.BAD_REQUEST, message.VALID_INPUT.replace('#', 'Chat id'));
+    }
+    const messages = await messageModel
+    .find({ chatId })
+    .sort({ createdAt: -1 })
+    .limit(10)
+    .populate('sender', 'userName')
+    .exec();    
+    const totalPages = Math.ceil(chat.length / 10)
+    return { messages: messages.reverse(), total: message.length, totalPages };
         
 }

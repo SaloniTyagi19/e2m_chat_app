@@ -6,5 +6,6 @@ const chatRoutes = express.Router();
 chatRoutes.use(auth())
 chatRoutes.post('/create', chatController.createChat);
 chatRoutes.post('/invite/:id', chatController.chatInvite);
-chatRoutes.post('/getChats', chatController.getChats);
+chatRoutes.get('/getChats', chatController.getChats);
+chatRoutes.get('/getMessages', chatController.getMessages);
 export default chatRoutes;
