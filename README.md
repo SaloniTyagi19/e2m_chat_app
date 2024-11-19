@@ -4,7 +4,7 @@ Steps to run the app
 2. npm i
 3. Create a .env file with the following variables
 NODE_ENV= 
-PORT=
+PORT=3005
 JWT_ACCESS_EXPIRATION_MINUTES=
 JWT_REFRESH_EXPIRATION_DAYS=
 JWT_SECRET=
